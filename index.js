@@ -1,5 +1,7 @@
 const gpio = require("rpi-gpio");
 
+gpio.setMode(gpio.MODE_BCM);
+
 function promiseSetupPin(pin, direction) {
     return new Promise((resolve, reject) => {
         gpio.setup(pin, direction, resolve);
