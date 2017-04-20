@@ -8,6 +8,19 @@ function setupPin(pin, direction) {
     });
 }
 
-Promise.all([setupPin(24, gpio.DIR_OUT)]).then(() => {
-    gpio.write(24, true);
-});
+function setupPins() {
+    return Promise.all([setupPin(24, gpio.DIR_OUT), setupPin(23, gpio.DIR_OUT), setupPin(18, gpio.DIR_OUT)]);
+}
+
+function resetPins() {
+    gpio.write(18, false);
+    gpio.write(23, false);
+    gpio.write(24, false);
+}
+
+async function main() {
+    await setupPins();
+    resetPins();
+}
+
+main();
