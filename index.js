@@ -26,7 +26,17 @@ async function main() {
     await setupPins();
     await resetPins();
 
-    await writePin(24, true);
+    const pins = [18, 23, 24];
+    let currentIndex = 0;
+
+    setInterval(function() {
+        const currentPin = pins[currentIndex];
+        await resetPins();
+        await writePin(currentPin, true);
+        currentIndex = currentIndex + 1 >= pins.length ? 0 : currentIndex + 1;
+    }, 300);
+
+
 }
 
 main();
