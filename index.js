@@ -8,19 +8,25 @@ function setupPin(pin, direction) {
     });
 }
 
+function writePin(pin, value) {
+    return new Promise((resolve, reject) => {
+        gpio.write(pin, value, resolve);
+    });
+}
+
 function setupPins() {
     return Promise.all([setupPin(24, gpio.DIR_OUT), setupPin(23, gpio.DIR_OUT), setupPin(18, gpio.DIR_OUT)]);
 }
 
 function resetPins() {
-    gpio.write(18, false);
-    gpio.write(23, false);
-    gpio.write(24, false);
+    return Promise.all([writePin(18, false), writePin(23, false), writePin(24, false)]);
 }
 
 async function main() {
     await setupPins();
-    resetPins();
+    await resetPins();
+
+    await writePin(24, true);
 }
 
 main();
