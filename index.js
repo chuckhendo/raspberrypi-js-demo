@@ -34,7 +34,7 @@ async function main() {
         await resetPins();
         await writePin(currentPin, true);
         currentIndex = currentIndex + 1 >= pins.length ? 0 : currentIndex + 1;
-    }, 100);
+    }, 200);
 
 
 }
